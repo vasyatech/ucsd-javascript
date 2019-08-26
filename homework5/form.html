@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Validate me</title>
+</head>
+<body>
+At lease one piece of data has to come in from every input type.
+<form action = "form.html" method = "get"><br/>
+Name:<input type = "text" name = "fullname" value="Enter Full Name"/><br/>
+Gender:<br/>
+Male<input type = "radio" name = "gender" value="male"/>Female<input type = "radio" name = "gender" value="female"/><br/>
+Hobbies<br/>
+Baseball <input type = "checkbox" name = "hobbies[]" value = "baseball" />  
+Football <input type = "checkbox" name = "hobbies[]" value = "football" />  
+Hockey <input type = "checkbox" name = "hobbies[]" value = "hockey" /><br/>
+Favorite Show <select name = "show">
+<option value = "">Choose Below</option>
+<option value = "ATHF">Aqua Teen Hunger Force</option>
+<option value = "Family Guy">Family Guy</option>
+<option value = "Simpsons">Simpsons</option>
+</select><br/>
+Comments<br/>
+<textarea cols = "50" rows = "6" name = "comments">Enter Comments</textarea><br/>
+<input type = "submit" name = "submit" value = "enter me" />
+</form>
+<script>
+    for (var i = 0; i < document.getElementsByName("submit").length; i++){    
+        document.getElementsByName("submit")[i].addEventListener("click", btnOnClick);
+    }
+    //or document.getElementsByName("submit")[0].addEventListener("click", btnOnClick);
+    
+    
+    function btnOnClick() {
+        var elementName = '';
+        var checked = false;
+        for(var i = 0; i < document.forms.length; i++){ //if there are more than one form in the document
+            var el = document.forms[i].elements;
+            for(var j = 0; j < el.length; j++){
+                //input
+                if (el[j].tagName.toLowerCase() == "input"){
+                    //text
+                    if( el[j].type == "text" && (el[j].value.length == 0 || el[j].value == "Enter Full Name")) {
+                        alert("Please input " + el[j].name);
+                        el[j].focus();
+                    }
+                    //radio and checkbox
+                    if( el[j].type == "radio" || el[j].type == "checkbox") {
+                        checked = false;
+                        if(elementName != el[j].name) {
+                            elementName = el[j].name;
+                            for (var k = 0; k < document.getElementsByName(elementName).length; k++){
+                                if (document.getElementsByName(elementName)[k].checked == true){
+                                   checked = true;
+                                }   
+                            }
+                            if (checked == false){
+                                alert("Please select " + el[j].name);
+                            }
+                        }    
+                    }
+                }
+                //select
+                else if (el[j].tagName.toLowerCase() == "select"){
+                      if (el[j].value == ""){
+                            alert("Please select " + el[j].name);
+                      }                 
+                }
+                //textarea
+                else if (el[j].tagName.toLowerCase() == "textarea"){
+                      if (el[j].value == "" || el[j].value == "Enter Comments"){
+                            alert("Please input " + el[j].name);
+                      }
+                }
+            }
+        }
+    }   
+</script>
+
+
+
+
+
+
+</form>
+</body>
+</html>

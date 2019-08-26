@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                const formatter = new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 2
+                })
+                
+                var price = 0.00;
+                var taxRate = 0.00;
+                var tax = 0.00;
+                var total = 0.00;
+                
+                price = document.getElementById("price").value;
+                if (price < 10) {
+                    taxRate = 10;
+                } 
+                else if (price >= 10 && price < 20) {
+                    taxRate = 7.25;
+                } 
+                else {
+                    taxRate = 5;
+                }
+                document.getElementById("lbl_tax").innerHTML = "Tax (" + taxRate + "%):";
+                tax = price*taxRate/100;
+                document.getElementById("tax").innerHTML = formatter.format(tax);
+                document.getElementById("lbl_total").innerHTML = "Total:";
+                total = price*1+tax;
+                document.getElementById("total").innerHTML = formatter.format(total);
+            }
+        </script> 
+    </head>
+    <body>
+        Tax calculator<br><br>
+        Price: <input type="number" required id="price" min="0" value="0" step=".01"><br><br>
+        <input type="button" value="Calculate" onclick="myFunction()"><br>
+        <label id="lbl_tax"></label>     
+        <label id="tax" for="lbl_tax"></label><br> 
+        <label id="lbl_total"></label>     
+        <label id="total" for="lbl_total"></label>     
+
+    </body>
+</html>

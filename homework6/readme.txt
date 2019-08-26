@@ -1,0 +1,1 @@
+Your job is to take that data and output the weather including the description and temperature on a web page.

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script LANGUAGE="JavaScript">
+            function MakePage(name,town,roommate,age,dogs_cnt, cats_cnt) {
+                var dogs = "dogs";
+                var cats = "cats";
+                dogs_cnt = dogs_cnt.toLowerCase().trim();
+                cats_cnt = cats_cnt.toLowerCase().trim();
+                if (dogs_cnt == "1" || dogs_cnt == "one"){
+                    dogs = "dog";   
+                }
+                if (cats_cnt == "1" || cats_cnt == "one"){
+                    cats = "cat";                    
+                }
+                var content = '<html><head><title>'+name+'\'s Page</title>' +
+                '</head><body background="space.gif" text="yellow" link="#FFBBBB" vlink="#FFBBBB">' +
+                '<font color="4EEA6C"><center><h1>' +
+                name + '\'s Page</h1></center></font>' +
+                '<img align=left src="heart.gif" width="72" height="72">Hello, and welcome to my page. I live in ' + town + ' and I am ' + age + ' years old.' +
+                '<p>' + town + ' isn\'t a bad place to live, if you can stand ' + roommate + '\'s cooking. ' +
+                'In addition, we have ' + dogs_cnt + ' ' + dogs + ' and  ' + cats_cnt + ' ' + cats +'. </p>' +
+                'Some people think they\'re so cool just because they created a home page. <br> ' +
+                'They have fancy backgrounds and colors, but they just go on and on with nothing to say. <br> ' +
+                '<a href="http://www.yahoo.com/">Click Here to search Yahoo</a> Boy, there\'s a link I never' +
+                ' would have found on my own. Some people\'s pages are so boring I think my computer could do' +
+                ' a better job with a 10 line program.' 
+
+                document.open()
+                document.write(content)
+                document.close()
+
+            } 
+        </script>
+    </head>
+    <body>
+        <br><h3>Writing to a document</h3>
+        <p>With just a little creativity, you can have JavaScript create fully formatted web pages on the fly.</p>
+        <table bgcolor="beige" border=1>
+            <form>
+                <tr>
+                    <td>
+                        Please enter your first name <input type=text name="fname" size=20><br>
+                        What city/town do you live in? <input type=text name="town" size=20><br>
+                        How old are you? <input type=text name="age" size=4><br>
+                        Name another person in your house <input type=text name="roommate" size=20><br>
+                        How many dogs are in your household? <input type=text name="dogs_cnt" size=20><br>
+                        How many cats are in your household? <input type=text name="cats_cnt" size=20><br>
+                        <input type=button value="Create my Home Page" 
+                        onClick="MakePage(this.form.fname.value,this.form.town.value,this.form.roommate.value,this.form.age.value,this.form.dogs_cnt.value, this.form.cats_cnt.value)">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <script>           
+           function WeatherForecast(data) {
+               this.dt = new Date(data.dt);
+               this.name = data.name;
+               this.longitude = data.coord.lon;
+               this.latitude = data.coord.lat;
+               this.clouds = data.clouds.all;
+               this.visibility = data.visibility;
+               this.sunrise = new Date(data.sys.sunrise);
+               this.sunset = new Date(data.sys.sunset);
+               this.humidity = data.main.humidity;
+               this.pressure = data.main.pressure;
+               this.temp = data.main.temp;
+               this.temp_max = data.main.temp_max;
+               this.temp_min = data.main.temp_min;
+               this.weather = data.weather;
+            }
+           
+           WeatherForecast.prototype.weatherSummary = function() {
+                var summary = "Date: " + this.dt.toDateString() + "<br />";
+                summary += "Clouds: " +  this.clouds + "%" + "<br />";
+                summary += "City: " + this.name + "(longitude: " + this.longitude + ", latitude: " + this.latitude + ")" + "<br />";
+                summary += "Clouds: " +  this.clouds + "%" + "<br />";
+                summary += "Visibility: " + this.visibility + "<br />"
+                summary += "Sunrise: " + this.sunrise.getUTCHours() + ":" + this.sunrise.getUTCMinutes() + "<br />";
+                summary += "Sunset: " + this.sunset.getUTCHours() + ":" + this.sunset.getUTCMinutes() + "<br />";
+                summary += "Humidity: " +  this.humidity + "<br />";
+                summary += "Pressure: " +  this.pressure + "<br />";
+                summary += "Temperature: " +  this.temp + "(Min: " + this.temp_min + ", Max: " + this.temp_max + ") <br />";
+                for(x in this.weather){
+                   summary += this.weather[x].description + " ";    
+                }
+                return summary;
+           };
+           
+            var getJSON = function(url, callback) 
+            {
+                var xhr = new XMLHttpRequest();
+                xhr.open('get', url, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() 
+                {
+                    var status = xhr.status;
+                    if (status == 200) 
+                    {
+                        callback(null, xhr.response);
+                    } 
+                    else 
+                    {
+                        callback(status, xhr.response);
+                    }
+                };
+                xhr.send();
+            };
+
+            getJSON('http://mm214.com/demo.php', 
+                function(err, data) 
+                {
+                    if (err != null) 
+                    {
+                        alert('An error occurred: ' + err);
+                    } 
+                    else 
+                    {
+                        var todaysWeather = new WeatherForecast(data);
+                        document.getElementById("weather").innerHTML = todaysWeather.weatherSummary(); 
+                    }
+                }
+            );
+       </script>
+    </head>
+    <body>
+        <h1>Weather Forecast</h1>
+        <p id="weather"></p>
+    </body>
+</html>

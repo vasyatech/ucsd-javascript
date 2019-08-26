@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                //alert(document.getElementById("dob").value);
+                var controlDate = new Date();
+                controlDate.setHours(0, 0, 0, 0);   
+                controlDate.setFullYear( controlDate.getFullYear() - 18); //18 yrs ago
+                var controlDateMs = controlDate.getTime();
+                //alert(controlDateMs);
+                var birthDateMs = new Date(document.getElementById("dob").value).getTime();
+                //alert(birthDateMs);
+                if (birthDateMs <= controlDateMs){
+                    alert("older than 18");
+                }
+                else{
+                    alert("younger than 18");
+                }
+            }
+        </script> 
+    </head>
+    <body>
+        <form>
+            Input your date of birth: <input type="date" id="dob" onchange="myFunction()">
+        </form>
+    </body>
+</html>

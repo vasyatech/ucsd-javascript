@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function validateForm(){
+                var f = document.getElementById("myForm");
+                for (var i = 0; i < f.length; i++){
+                    if (f.elements[i].type == "text"){
+                        if (f.elements[i].value == ''){
+                            alert(f.elements[i].name + ' required');
+                            f.elements[i].focus();
+                        }
+                    }
+                    if (f.elements[i].type == "email"){
+                        var t =f.elements[i].value.search("@");
+                        if (f.elements[i].value.search("@") == -1){
+                            alert("Invalid email address");
+                            f.elements[i].focus();
+                        }
+                    }                    
+                }
+            }
+        </script> 
+    </head>
+    <body>
+       <form id="myForm">
+           City:<input type="text" name="City" id="ucity">  
+           Email:<input type="email" id="uemail">
+           <input type="button" value="Submit" onclick="validateForm()">
+       </form>
+    </body>
+</html>

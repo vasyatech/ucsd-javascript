@@ -1,0 +1,264 @@
+1.
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                //alert(document.getElementById("dob").value);
+                var controlDate = new Date();
+                controlDate.setHours(0, 0, 0, 0);   
+                controlDate.setFullYear( controlDate.getFullYear() - 18); //18 yrs ago
+                var controlDateMs = controlDate.getTime();
+                //alert(controlDateMs);
+                var birthDateMs = new Date(document.getElementById("dob").value).getTime();
+                //alert(birthDateMs);
+                if (birthDateMs <= controlDateMs){
+                    alert("older than 18");
+                }
+                else{
+                    alert("younger than 18");
+                }
+            }
+        </script> 
+    </head>
+    <body>
+        <form>
+            Input your date of birth: <input type="date" id="dob" onchange="myFunction()">
+        </form>
+    </body>
+</html>
+2.
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                document.getElementById("lbl").innerHTML = '<a href="mailto:' + document.getElementById("uemail").value + '">' + document.getElementById("ucity").value  + ' is a great town!' + '</a>';  
+            }
+        </script> 
+    </head>
+    <body>
+       <form>
+           City:<input type="text" id="ucity">  
+           Email:<input type="email" id="uemail">
+           <input type="button" value="Submit" onclick="myFunction()"><br>
+           <label id="lbl"></label> 
+       </form>
+    </body>
+</html>
+3.
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function validateForm(){
+                var f = document.getElementById("myForm");
+                for (var i = 0; i < f.length; i++){
+                    if (f.elements[i].type == "text"){
+                        if (f.elements[i].value == ''){
+                            alert(f.elements[i].name + ' required');
+                            f.elements[i].focus();
+                        }
+                    }
+                    if (f.elements[i].type == "email"){
+                        var t =f.elements[i].value.search("@");
+                        if (f.elements[i].value.search("@") == -1){
+                            alert("Invalid email address");
+                            f.elements[i].focus();
+                        }
+                    }                    
+                }
+            }
+        </script> 
+    </head>
+    <body>
+       <form id="myForm">
+           City:<input type="text" name="City" id="ucity">  
+           Email:<input type="email" id="uemail">
+           <input type="button" value="Submit" onclick="validateForm()">
+       </form>
+    </body>
+</html>
+4.
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <img src="t-shirt.jpg" height="250">
+        <form id="myForm">
+            Name: <input type="text" name="Name" id="name"><br><br>  
+            Shipping Address: <input type="text" name="address" id="address"><br><br>
+            Email: <input type="email" id="email" name="email"><br><br> 
+            Size: <select id="size">
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select><br><br>
+            <input type="radio" name="shipping" value="pickup"> Pickup In-Store <br>
+            <input type="radio" name="shipping" value="delivey"> Ship to an Address <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
+5.
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                const formatter = new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 2
+                })
+                
+                var price = 0.00;
+                var taxRate = 0.00;
+                var tax = 0.00;
+                var total = 0.00;
+                
+                price = document.getElementById("price").value;
+                if (price < 10) {
+                    taxRate = 10;
+                } 
+                else if (price >= 10 && price < 20) {
+                    taxRate = 7.25;
+                } 
+                else {
+                    taxRate = 5;
+                }
+                document.getElementById("lbl_tax").innerHTML = "Tax (" + taxRate + "%):";
+                tax = price*taxRate/100;
+                document.getElementById("tax").innerHTML = formatter.format(tax);
+                document.getElementById("lbl_total").innerHTML = "Total:";
+                total = price*1+tax;
+                document.getElementById("total").innerHTML = formatter.format(total);
+            }
+        </script> 
+    </head>
+    <body>
+        Tax calculator<br><br>
+        Price: <input type="number" required id="price" min="0" value="0" step=".01"><br><br>
+        <input type="button" value="Calculate" onclick="myFunction()"><br>
+        <label id="lbl_tax"></label>     
+        <label id="tax" for="lbl_tax"></label><br> 
+        <label id="lbl_total"></label>     
+        <label id="total" for="lbl_total"></label>     
+
+    </body>
+</html>
+6.
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                var myText = "";
+                for (var i = 1; i <= 1000; i++){
+                    if (i % 7 == 0) {
+                        myText = myText + i + "<br />"
+                        //console.log(i);
+                    }
+                }
+                document.getElementById("my_output").innerHTML = myText;
+            }
+        </script> 
+    </head>
+    <body onload="myFunction()">
+    <p id="my_output">
+    </p>
+    </body>
+</html>
+7.
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+    <script>
+        function myFunction(){
+            var t = document.getElementById("zebraTable");
+            for (var i = 0; i < t.rows.length; i++){
+                if (i % 2 != 0) { 
+                    var x = t.rows[i].cells;
+                    for (j = 0; j < x.length; j++) {
+                        x[j].bgColor = "#eee";
+                    }
+                }
+            }
+        }
+    </script> 
+</head>
+
+<body onload="myFunction()">
+Make every other row in the following table have a background color of #eee
+<table id="zebraTable" class="allBorderTable">
+
+		<caption>Table 1: Power Mac G5 tech specs </caption>
+
+			<tr>
+
+				<th>Configurations</th>
+
+				<th>Dual 1.8GHz</th>
+
+				<th>Dual 2GHz</th>
+
+				<th>Dual 2.5GHz</th>
+
+			</tr>
+
+			<tr>
+
+				<td>Model</td>
+
+				<td>M9454LL/A</td>
+
+				<td>M9455LL/A</td>
+
+				<td>M9457LL/A</td>
+
+			</tr>
+
+			<tr>
+
+				<td>G5 Processor</td>
+
+				<td>Dual 1.8GHz PowerPC G5</td>
+
+				<td>Dual 2GHz PowerPC G5</td>
+
+				<td>Dual 2.5GHz PowerPC G5</td>
+
+			</tr>
+
+			<tr>
+
+				<td>Frontside bus</td>
+
+				<td>900MHz per processor</td>
+
+				<td>1GHz per processor</td>
+
+				<td>1.25GHz per processor</td>
+
+			</tr>
+
+			<tr>
+
+				<td>Level2 Cache</td>
+
+				<td>512K per processor</td>
+
+				<td>512K per processor</td>
+
+				<td>512K per processor</td>
+
+			</tr>
+
+		</table>
+
+</body>
+</html>

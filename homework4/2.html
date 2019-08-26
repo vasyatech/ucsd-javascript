@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(){
+                document.getElementById("lbl").innerHTML = '<a href="mailto:' + document.getElementById("uemail").value + '">' + document.getElementById("ucity").value  + ' is a great town!' + '</a>';  
+            }
+        </script> 
+    </head>
+    <body>
+       <form>
+           City:<input type="text" id="ucity">  
+           Email:<input type="email" id="uemail">
+           <input type="button" value="Submit" onclick="myFunction()"><br>
+           <label id="lbl"></label> 
+       </form>
+    </body>
+</html>
